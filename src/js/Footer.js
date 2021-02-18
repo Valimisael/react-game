@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/footer.scss';
 import logo from '../img/rs_school_js.svg';
 
 const footer = {
