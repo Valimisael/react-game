@@ -18,10 +18,17 @@ class Cards extends React.Component {
     super(props);
     this.handleState = this.handleState.bind(this);
     this.compareImages = this.compareImages.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
-      first: null,
-      second: null,
+      first: {
+        src: null,
+        id: null,
+      },
+      second: {
+        src: null,
+        id: null,
+      },
     }
   }
 
@@ -35,42 +42,63 @@ class Cards extends React.Component {
 
   images = this.shuffle(images);
 
-  handleState = (value) => {    
-    if (this.state.first == null) {
-      this.setState({
-        first: value,
-      })
-    } else if (this.state.second == null) {
-      this.setState({
-        second: value,
-      })
+  handleState = (value) => {
+    const src = value.state.src;
+    const id = value.props.id;
 
-      setTimeout(() =>
-        this.compareImages(this.state.first, value),
-        1000
-      )
+    if (this.state.first.src == null) {
+      this.setState({
+        first: {
+          src: src,
+          id: id,
+        }
+      })
+    } else if (this.state.second.src == null) {
+      this.setState({
+        second: {
+          src: src,
+          id: id,
+        }
+      })
     }
   }
 
-  compareImages = (first, second) => {    
+  compareImages = (first, second) => { 
     if (first != second) {
-      document.querySelectorAll('.flipped').forEach((card) => {
-        card.classList.remove('flipped');
-      })
+      document.getElementById(this.state.first.id).classList.remove('flipped');
+      document.getElementById(this.state.second.id).classList.remove('flipped');
+      this.resetState();
     } else {
-      this.setState({
-        first: null,
-        second: null,
-      })
-    }
+      this.resetState();
+    }  
+  }
+
+  resetState = () => {
+    this.setState({
+      first: {
+        src: null,
+        id: null,
+      },
+      second: {
+        src: null,
+        id: null,
+      }
+    })
   }
 
   render() {
+    if (this.state.second.src != null) {
+      setTimeout(() =>
+        this.compareImages(this.state.first.src, this.state.second.src),
+        1000
+      )
+    }
+
     return(
       images.map((image, index) => {
         return(
           <div className="card" key={index}>
-            <Card image={image} handle={this.handleState} />
+            <Card image={image} id={index} handle={this.handleState} />
           </div>
         )
       })

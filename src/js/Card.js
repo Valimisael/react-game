@@ -8,21 +8,20 @@ class Card extends React.Component {
 
     this.state = {
       class: 'card__inner',
+      src: this.props.image,
     }
   }
 
-  handleClick = () => {
-    this.props.handle(this.props.image);
-    this.setState({
-      class: 'card__inner flipped',
-    })
+  handleClick = (event) => {
+    document.getElementById(this.props.id).classList.add('flipped');
+    this.props.handle(this);
   }
 
   render() {
-    const {image} = this.props;
+    const {image, id} = this.props;
 
     return(
-      <div onClick={this.handleClick} className={this.state.class}>
+      <div onClick={this.handleClick} className={this.state.class} id={id} >
         <div className="card__front">
           <img className="card__image" src={image} />
         </div>

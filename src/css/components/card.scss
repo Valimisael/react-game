@@ -18,6 +18,7 @@
 
     &.flipped {      
       transform: rotateY(180deg);
+      pointer-events: none;
     }
   }
 
