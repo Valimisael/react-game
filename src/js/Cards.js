@@ -65,9 +65,15 @@ class Cards extends React.Component {
 
   compareImages = (first, second) => { 
     if (first != second) {
-      document.getElementById(this.state.first.id).classList.remove('flipped');
-      document.getElementById(this.state.second.id).classList.remove('flipped');
+      const first = this.state.first.id;
+      const second = this.state.second.id;
+
       this.resetState();
+
+      setTimeout(() => {
+        document.getElementById(first).classList.remove('flipped');
+        document.getElementById(second).classList.remove('flipped');        
+      }, 1000);
     } else {
       this.resetState();
     }  
@@ -88,10 +94,7 @@ class Cards extends React.Component {
 
   render() {
     if (this.state.second.src != null) {
-      setTimeout(() =>
-        this.compareImages(this.state.first.src, this.state.second.src),
-        1000
-      )
+      this.compareImages(this.state.first.src, this.state.second.src);
     }
 
     return(
