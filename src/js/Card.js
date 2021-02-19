@@ -12,7 +12,7 @@ class Card extends React.Component {
     }
   }
 
-  handleClick = (event) => {
+  handleClick = () => {
     document.getElementById(this.props.id).classList.add('flipped');
     this.props.handle(this);
   }

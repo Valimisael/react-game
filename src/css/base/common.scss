@@ -53,12 +53,13 @@ body {
 main {
   color: $color-black;
   width: 100%;
-  height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
   background-color: $bg-milk;
   padding: 20px;
   display: flex;  
   align-items: center;
   justify-content: center;
+  transition: all 1s ease-out;
 }
 
 a {
@@ -68,4 +69,15 @@ a {
 
 strong {
   font-weight: bold;
+}
+
+.night-mode {
+  header,
+  footer {
+    background-color: $night-nav;
+  }
+
+  main {
+    background-color: $night-body;
+  }
 }
