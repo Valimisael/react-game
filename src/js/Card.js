@@ -1,5 +1,5 @@
 import React from 'react';
-import CardBack from '../img/cards/cover.jpg';
+import CardBack from '../img/covers/cover-1.jpg';
 
 class Card extends React.Component {  
   constructor(props) {
@@ -26,7 +26,7 @@ class Card extends React.Component {
           <img className="card__image" src={image} />
         </div>
         <div className="card__back">
-          <img src={CardBack} />
+          <img className="card__back--image" src={CardBack} />
         </div>
       </div>
     )

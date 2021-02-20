@@ -4,6 +4,7 @@ import '../css/main.scss';
 import Header from './Header.js';
 import Cards from './Cards.js';
 import Footer from './Footer.js';
+import PopUp from './PopUp';
 
 const App = () => {
   return(
@@ -15,6 +16,7 @@ const App = () => {
         </div>
       </main>
       <Footer />
+      <PopUp />
     </div>
   )
 }

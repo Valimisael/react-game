@@ -1,5 +1,6 @@
 import React from 'react';
 import ModeSwitcher from './ModeSwitcher';
+import ChooseCover from './ChooseCover';
 
 class Header extends React.Component {
   render() {
@@ -12,9 +13,8 @@ class Header extends React.Component {
           <h1>Memory Game</h1>
         </div>
         <div className="interface__settings">
-          <div className="mode-switcher">
-            <ModeSwitcher />
-          </div>
+          <ChooseCover />
+          <ModeSwitcher />
         </div>
       </header>
     )

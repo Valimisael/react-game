@@ -63,6 +63,12 @@ class Cards extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    if (this.state.second.src != null) {
+      this.compareImages(this.state.first.src, this.state.second.src);
+    }
+  }
+
   compareImages = (first, second) => { 
     if (first != second) {
       const first = this.state.first.id;
@@ -93,10 +99,6 @@ class Cards extends React.Component {
   }
 
   render() {
-    if (this.state.second.src != null) {
-      this.compareImages(this.state.first.src, this.state.second.src);
-    }
-
     return(
       images.map((image, index) => {
         return(
