@@ -1,22 +1,10 @@
 import React from 'react';
 import Card from './Card';
 
-import Angular from '../img/cards/angular.jpg';
-import CSS from '../img/cards/css.jpg';
-import Gulp from '../img/cards/gulp.jpg';
-import HTML from '../img/cards/html.jpg';
-import JS from '../img/cards/js.jpg';
-import ReactJS from '../img/cards/react.jpg';
-import SCSS from '../img/cards/scss.jpg';
-import Vue from '../img/cards/vue.jpg';
-import Webpack from '../img/cards/webpack.jpg';
-
-const images = [Angular, CSS, HTML, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, HTML, JS, Gulp, ReactJS, SCSS, Vue, Webpack];
-
 class Cards extends React.Component {
   constructor(props){
     super(props);
-    this.handleState = this.handleState.bind(this);
+    this.rememberCards = this.rememberCards.bind(this);
     this.compareImages = this.compareImages.bind(this);
     this.resetState = this.resetState.bind(this);
 
@@ -24,26 +12,18 @@ class Cards extends React.Component {
       first: {
         src: null,
         id: null,
+        paired: false,
       },
       second: {
         src: null,
         id: null,
+        paired: false,
       },
     }
   }
 
-  shuffle = (array) => {
-    for (let i = array.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-  }
-
-  images = this.shuffle(images);
-
-  handleState = (value) => {
-    const src = value.state.src;
+  rememberCards = (value) => {
+    const src = value.props.image;
     const id = value.props.id;
 
     if (this.state.first.src == null) {
@@ -60,7 +40,7 @@ class Cards extends React.Component {
           id: id,
         }
       })
-    }
+    }    
   }
 
   componentDidUpdate() {
@@ -78,9 +58,10 @@ class Cards extends React.Component {
 
       setTimeout(() => {
         document.getElementById(first).classList.remove('flipped');
-        document.getElementById(second).classList.remove('flipped');        
+        document.getElementById(second).classList.remove('flipped');
       }, 1000);
     } else {
+      this.props.returnPaired();
       this.resetState();
     }  
   }
@@ -90,20 +71,24 @@ class Cards extends React.Component {
       first: {
         src: null,
         id: null,
+        paired: false,
       },
       second: {
         src: null,
         id: null,
+        paired: false,
       }
     })
   }
 
   render() {
+    const {images} = this.props;
+    
     return(
       images.map((image, index) => {
         return(
           <div className="card" key={index}>
-            <Card image={image} id={index} handle={this.handleState} />
+            <Card image={image} id={index} rememberCards={this.rememberCards} />
           </div>
         )
       })

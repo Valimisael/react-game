@@ -2,7 +2,7 @@ import React from 'react';
 import '../css/vendor/reset.css';
 import '../css/main.scss';
 import Header from './Header.js';
-import Cards from './Cards.js';
+import Game from './Game.js';
 import Footer from './Footer.js';
 import PopUp from './PopUp';
 
@@ -11,9 +11,7 @@ const App = () => {
     <div className="app" id="app">
       <Header />
       <main>
-        <div className="cards">
-          <Cards />
-        </div>
+        <Game />
       </main>
       <Footer />
       <PopUp />
