@@ -16,7 +16,7 @@ class PopUp extends React.Component {
     return (
       <div className="popup" id="popup">
         <div className="popup__body">
-          <Covers />
+          <Covers changeCardsCover={this.props.changeCardsCover} />
           <div className="popup__close" onClick={this.handleClick}>x</div>
         </div>
       </div>

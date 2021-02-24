@@ -13,7 +13,7 @@ class Card extends React.Component {
   }
 
   render() {
-    const {image, id} = this.props;
+    const {image, cover, id} = this.props;
 
     return(
       <div onClick={this.handleClick} className="card__inner" id={id} >
@@ -21,7 +21,7 @@ class Card extends React.Component {
           <img className="card__image" src={image} />
         </div>
         <div className="card__back">
-          <img className="card__back--image" src={CardBack} />
+          <img className="card__back--image" src={cover} />
         </div>
       </div>
     )

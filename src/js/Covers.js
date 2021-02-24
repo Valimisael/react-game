@@ -16,7 +16,7 @@ class Covers extends React.Component {
       covers.map((cover, index) => {
         return (
           <div className="cover" key={index} >
-            <Cover cover={cover} id={index} />
+            <Cover changeCardsCover={this.props.changeCardsCover} cover={cover} id={index} />
           </div>
         )  
       })

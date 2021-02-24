@@ -1,7 +1,49 @@
 .cards {
   display: flex;
   flex-wrap: wrap;
-  width: 90%;
+  width: 95%;
   justify-content: center;
   max-width: 1400px;
+
+  &__easy {
+    max-width: 980px;
+
+    .card {
+      width: 50%;      
+      height: 20vh;    
+      
+      @media (min-width: 768px) {
+        width: 25%;      
+        height: 33vh; 
+      }     
+    }
+  }
+
+  &__medium {
+    max-width: 710px;
+
+    .card {
+      width: 25%;      
+      height: 17vh;   
+      
+      @media (min-width: 768px) {
+        width: 25%;      
+        height: 21vh;  
+      }   
+    }
+  }
+
+  &__hard {
+    max-width: 980px;
+
+    .card {
+      width: 25%;      
+      height: 14vh;  
+      
+      @media (min-width: 768px) {
+        width: 16.66%;      
+        height: 21vh;
+      }
+    }
+  }
 }

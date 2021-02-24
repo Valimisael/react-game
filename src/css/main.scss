@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Bad+Script&display=swap');
 
 @import 
-  'base/variables.scss',
-  'base/common.scss';
+  'base/variables',
+  'base/common',
+  'base/mixins';
 
 @import
-  'components/header.scss',
-  'components/footer.scss',
-  'components/cards.scss',
-  'components/card.scss',
+  'components/header',
+  'components/footer',
+  'components/cards',
+  'components/card',
   'components/mode-switcher',
   'components/choose-cover',
   'components/popup',
-  'components/cover';
+  'components/cover',
+  'components/level';

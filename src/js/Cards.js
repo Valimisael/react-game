@@ -12,12 +12,10 @@ class Cards extends React.Component {
       first: {
         src: null,
         id: null,
-        paired: false,
       },
       second: {
         src: null,
         id: null,
-        paired: false,
       },
     }
   }
@@ -71,24 +69,22 @@ class Cards extends React.Component {
       first: {
         src: null,
         id: null,
-        paired: false,
       },
       second: {
         src: null,
         id: null,
-        paired: false,
       }
     })
   }
 
   render() {
-    const {images} = this.props;
+    const {images, cover} = this.props;
     
     return(
       images.map((image, index) => {
         return(
           <div className="card" key={index}>
-            <Card image={image} id={index} rememberCards={this.rememberCards} />
+            <Card image={image} cover={cover} id={index} rememberCards={this.rememberCards} />
           </div>
         )
       })

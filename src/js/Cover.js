@@ -7,12 +7,8 @@ class Cover extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick = (event) => {
-    const covers = document.getElementsByClassName('card__back--image');
-    
-    for (let i = 0; i < covers.length; i++) {
-      covers[i].src = event.target.src;
-    }
+  handleClick = (event) => {    
+    this.props.changeCardsCover(event.target.src);
     
     document.getElementById('popup').style.display = 'none';
   }

@@ -1,5 +1,9 @@
 import React from 'react';
+import Header from './Header.js';
 import Cards from './Cards';
+import PopUp from './PopUp';
+
+import Cover from '../img/covers/cover-1.jpg';
 
 import Angular from '../img/cards/angular.jpg';
 import CSS from '../img/cards/css.jpg';
@@ -14,15 +18,43 @@ import Webpack from '../img/cards/webpack.jpg';
 class Game extends React.Component {
   constructor(props) {
     super(props);
+    this.chooseGameLevel = this.chooseGameLevel.bind(this);
+    this.changeCardsCover = this.changeCardsCover.bind(this);
     this.shuffle = this.shuffle.bind(this);
     this.returnPaired = this.returnPaired.bind(this);
     this.endGame = this.endGame.bind(this);
 
     this.state = {
-      images: [Angular, CSS, HTML, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, HTML, JS, Gulp, ReactJS, SCSS, Vue, Webpack],
-      cards: {},
+      0: [CSS, HTML, JS, Angular, CSS, HTML, JS, Angular],
+      1: [Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack],
+      2: [Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, CSS, HTML, JS, Angular, CSS, HTML, JS, Angular],
+      images: [Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack],
       rightAnswers: 0,
+      level: 'medium',
+      cover: Cover,
     }
+  }
+
+  chooseGameLevel = (id, title) => {
+    const cards = document.getElementsByClassName('flipped');
+
+    while (cards.length) {
+      cards[0].classList.remove('flipped');
+    }
+    
+    setTimeout(() => {
+      this.setState({      
+        images: this.shuffle(this.state[id]),
+        level: title,
+        rightAnswers: 0,
+      })
+    }, 500);
+  }
+
+  changeCardsCover = (cover) => {
+    this.setState({
+      cover: cover,
+    })
   }
 
   shuffle = (array) => {
@@ -63,7 +95,6 @@ class Game extends React.Component {
     const cards = images.map((image) => {
       return {
         src: image,
-        paired: false,
       }
     })
 
@@ -74,7 +105,7 @@ class Game extends React.Component {
 
   componentDidUpdate() {
     const answers = this.state.rightAnswers;
-    const cards = this.state.cards;
+    const cards = this.state.images;
     const flipped = document.getElementsByClassName('flipped');
 
     if (answers == cards.length) {
@@ -85,10 +116,16 @@ class Game extends React.Component {
   }
 
   render () {
-    return (      
-      <div className="cards">
-        <Cards images={this.state.images} returnPaired={this.returnPaired} />
-      </div>
+    return (  
+      <div>
+        <Header chooseGameLevel={this.chooseGameLevel} />
+        <main>
+          <div className={`cards cards__${this.state.level}`}>
+            <Cards images={this.state.images} cover={this.state.cover} chooseGameLevel={this.chooseGameLevel} returnPaired={this.returnPaired} />
+          </div>
+        </main>        
+        <PopUp changeCardsCover={this.changeCardsCover} />
+      </div>   
     )
   }
 }
