@@ -1,5 +1,5 @@
 import React from 'react';
-import {flipFront, music} from './Audio';
+import {flipFront} from './Audio';
 
 class Card extends React.Component {  
   constructor(props) {

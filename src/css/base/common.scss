@@ -51,15 +51,15 @@ body {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   color: $color-black;
   width: 100%;
   min-height: calc(100vh - 100px);
   background-color: $bg-milk;
   padding: 20px;
-  display: flex;  
   align-items: center;
   justify-content: center;
-  transition: all 1s ease-out;
 }
 
 a {
@@ -79,5 +79,9 @@ strong {
 
   main {
     background-color: $night-body;
+  }
+
+  .audio-settings__item--name {
+    color: $color-white;
   }
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import AudioSettings from './AudioSettings';
 import Card from './Card';
 import PopUp from './PopUp';
 import {flipBack, flipAll, music} from './Audio';
@@ -58,6 +59,7 @@ class Game extends React.Component {
 
     while (cards.length) {
       cards[0].classList.remove('flipped');
+
       flipAll.play();
     }
 
@@ -119,6 +121,7 @@ class Game extends React.Component {
       setTimeout(() => {
         document.getElementById(first).classList.remove('flipped');
         document.getElementById(second).classList.remove('flipped');
+
         flipBack.play();
       }, 1000);
     } else {
@@ -153,6 +156,7 @@ class Game extends React.Component {
 
     while (cards.length) {
       cards[0].classList.remove('flipped');
+
       flipAll.play();
     }
     
@@ -166,7 +170,8 @@ class Game extends React.Component {
 
   componentDidMount() {
     music.muted = true;
-    
+    music.volume = 0.2;
+
     const images = this.state.images;
 
     this.setState({
@@ -200,6 +205,7 @@ class Game extends React.Component {
       <div>
         <Header chooseGameLevel={this.chooseGameLevel} />
         <main>
+          <AudioSettings setAudioVolume={this.setAudioVolume} />
           <div className={`cards cards__${this.state.level}`}>
             {
               images.map((image, index) => {

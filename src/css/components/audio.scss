@@ -1,45 +1,33 @@
-.audio {
+.audio-settings {
+  padding: 10px 10px 20px 10px;
   display: flex;
-  justify-content: center;
-  padding: 10px 0;
 
-  &__music {
+  &__item {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    padding: 0 10px;
+
+    &--name {
+      padding-right: 10px;
+      font-weight: 700;
+    }
   }
 
-  audio {
-    height: 30px;
-    width: 120px;
+  &__mute {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    background-image: url("../../img/audio/volume-up.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
 
-    &::-webkit-media-controls-play-button,
-    &::-webkit-media-controls-timeline,
-    &::-webkit-media-controls-current-time-display,
-    &::-webkit-media-controls-time-remaining-display,
-    &::-webkit-media-controls-toggle-closed-captions-button {
-      display: none;
+    &.muted {
+      background-image: url("../../img/audio/volume-mute.png");
     }
+  }
 
-    &::-webkit-media-controls-volume-slider-container,
-    &::-webkit-media-controls-volume-slider {
-      display: block;
-    }
+  input[type="checkbox"] {
+    display: none;
   }
 }
-
-// audio::-webkit-media-controls-panel
-// audio::-webkit-media-controls-mute-button
-// audio::-webkit-media-controls-play-button
-// audio::-webkit-media-controls-timeline-container
-// audio::-webkit-media-controls-current-time-display
-// audio::-webkit-media-controls-time-remaining-display
-// audio::-webkit-media-controls-timeline
-// audio::-webkit-media-controls-volume-slider-container
-// audio::-webkit-media-controls-volume-slider
-// audio::-webkit-media-controls-seek-back-button
-// audio::-webkit-media-controls-seek-forward-button
-// audio::-webkit-media-controls-fullscreen-button
-// audio::-webkit-media-controls-rewind-button
-// audio::-webkit-media-controls-return-to-realtime-button
-// audio::-webkit-media-controls-toggle-closed-captions-button
