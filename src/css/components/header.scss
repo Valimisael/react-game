@@ -10,9 +10,13 @@ header {
 }
 
 .game {
+  &__settings {
+    display: flex;
+  }
+
   &__name {
     h1 {
-      font-size: 24px;
+      font-size: $font-size-24;
     }
   }
 }

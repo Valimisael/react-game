@@ -1,5 +1,5 @@
 import React from 'react';
-import CardBack from '../img/covers/cover-1.jpg';
+import {flipFront, music} from './Audio';
 
 class Card extends React.Component {  
   constructor(props) {
@@ -9,6 +9,8 @@ class Card extends React.Component {
 
   handleClick = () => {
     document.getElementById(this.props.id).classList.add('flipped');
+    flipFront.play();
+
     this.props.rememberCards(this);
   }
 

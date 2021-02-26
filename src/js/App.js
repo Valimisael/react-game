@@ -1,10 +1,10 @@
 import React from 'react';
 import '../css/vendor/reset.css';
 import '../css/main.scss';
-import Game from './Game.js';
-import Footer from './Footer.js';
+import Game from './Game';
+import Footer from './Footer';
 
-const App = () => {
+const App = () => {  
   return(
     <div className="app" id="app">
       <Game />

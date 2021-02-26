@@ -1,0 +1,45 @@
+.audio {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+
+  &__music {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  audio {
+    height: 30px;
+    width: 120px;
+
+    &::-webkit-media-controls-play-button,
+    &::-webkit-media-controls-timeline,
+    &::-webkit-media-controls-current-time-display,
+    &::-webkit-media-controls-time-remaining-display,
+    &::-webkit-media-controls-toggle-closed-captions-button {
+      display: none;
+    }
+
+    &::-webkit-media-controls-volume-slider-container,
+    &::-webkit-media-controls-volume-slider {
+      display: block;
+    }
+  }
+}
+
+// audio::-webkit-media-controls-panel
+// audio::-webkit-media-controls-mute-button
+// audio::-webkit-media-controls-play-button
+// audio::-webkit-media-controls-timeline-container
+// audio::-webkit-media-controls-current-time-display
+// audio::-webkit-media-controls-time-remaining-display
+// audio::-webkit-media-controls-timeline
+// audio::-webkit-media-controls-volume-slider-container
+// audio::-webkit-media-controls-volume-slider
+// audio::-webkit-media-controls-seek-back-button
+// audio::-webkit-media-controls-seek-forward-button
+// audio::-webkit-media-controls-fullscreen-button
+// audio::-webkit-media-controls-rewind-button
+// audio::-webkit-media-controls-return-to-realtime-button
+// audio::-webkit-media-controls-toggle-closed-captions-button
