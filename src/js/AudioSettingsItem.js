@@ -1,5 +1,5 @@
 import React from 'react';
-import {flipFront, flipBack, flipAll, music} from './Audio';
+import {flipFront, flipBack, flipAll, correct, music} from './Audio';
 
 class AudioSettingsItem extends React.Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class AudioSettingsItem extends React.Component {
     this.handleVolume = this.handleVolume.bind(this);
 
     this.music = music;
-    this.sounds = [flipFront, flipBack, flipAll];
+    this.sounds = [flipFront, flipBack, correct, flipAll];
   }
 
   handleClick = (event) => {

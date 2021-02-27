@@ -3,7 +3,7 @@ import Header from './Header';
 import AudioSettings from './AudioSettings';
 import Card from './Card';
 import PopUp from './PopUp';
-import {flipBack, flipAll, music} from './Audio';
+import {flipBack, flipAll, correct, music} from './Audio';
 
 import Cover from '../img/covers/cover-1.jpg';
 
@@ -127,6 +127,8 @@ class Game extends React.Component {
     } else {
       this.returnPaired();
       this.resetState();
+      
+      correct.play();
     }  
   }
 
