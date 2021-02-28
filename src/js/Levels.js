@@ -10,7 +10,7 @@ class Levels extends React.Component {
 
     this.state = {
       levels: ['Easy', 'Medium', 'Hard'],
-      active: 1,
+      active: 0,
     }
   }
 

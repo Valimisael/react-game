@@ -26,21 +26,25 @@ class Game extends React.Component {
     this.chooseGameLevel = this.chooseGameLevel.bind(this);
     this.changeCardsCover = this.changeCardsCover.bind(this);
     this.shuffle = this.shuffle.bind(this);
+    this.gameStart = this.gameStart.bind(this);
+    this.restartGame = this.restartGame.bind(this);
+    this.timer = this.timer.bind(this);
+    this.countSteps = this.countSteps.bind(this);
     this.rememberCards = this.rememberCards.bind(this);
     this.compareImages = this.compareImages.bind(this);
     this.resetState = this.resetState.bind(this);
     this.returnPaired = this.returnPaired.bind(this);
     this.endGame = this.endGame.bind(this);
+    this.getResults = this.getResults.bind(this);
+    this.formatTime = this.formatTime.bind(this);
 
-    this.images = [Angular, CSS, ESLint, Gulp, HTML, JS, NodeJS, Redux, ReactJS, SCSS, Vue, Webpack];
+    this.easy = [SCSS, Webpack, JS, ReactJS, SCSS, Webpack, JS, ReactJS];
+    this.medium = [Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack];
+    this.hard = [Angular, CSS, ESLint, Gulp, HTML, JS, NodeJS, Redux, ReactJS, SCSS, Vue, Webpack, Angular, CSS, ESLint, Gulp, HTML, JS, NodeJS, Redux, ReactJS, SCSS, Vue, Webpack];
 
     this.state = {
-      0: [CSS, HTML, JS, Angular, CSS, HTML, JS, Angular],
-      1: [Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack],
-      2: [Angular, CSS, ESLint, Gulp, HTML, JS, NodeJS, Redux, ReactJS, SCSS, Vue, Webpack, Angular, CSS, ESLint, Gulp, HTML, JS, NodeJS, Redux, ReactJS, SCSS, Vue, Webpack],
-      images: [Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack],
-      rightAnswers: 0,
-      level: 'medium',
+      images: this.easy,
+      level: 'easy',
       cover: Cover,
       first: {
         src: null,
@@ -50,12 +54,18 @@ class Game extends React.Component {
         src: null,
         id: null,
       },
+      isGoing: false,
+      rightAnswers: 0,
+      time: 0,
+      steps: 0,
     }
   }
 
   chooseGameLevel = (id, title) => {
+    document.getElementById('restart-game').style.visibility = 'hidden';
+
     const cards = document.getElementsByClassName('flipped');
-    const images = this.state[id];
+    const images = this[title];
 
     while (cards.length) {
       cards[0].classList.remove('flipped');
@@ -66,10 +76,13 @@ class Game extends React.Component {
     this.resetState();
     
     setTimeout(() => {
-      this.setState({      
+      this.setState({
+        isGoing: false,
         images: this.shuffle(images),
         level: title,
         rightAnswers: 0,
+        steps: 0,
+        time: 0,
       })
     }, 500);
   }
@@ -80,12 +93,64 @@ class Game extends React.Component {
     })
   }
 
+  gameStart = () => {
+    document.getElementById('restart-game').style.visibility = 'visible';
+
+    if (this.state.isGoing == false) {
+      this.setState({
+        isGoing: true,
+      })
+
+      this.timer();
+    }
+  }
+
+  restartGame = (cards) => {    
+    document.getElementById('restart-game').style.visibility = 'hidden';
+
+    const images = this.state.images;
+
+    this.resetState();
+
+    while (cards.length) {
+      cards[0].classList.remove('flipped');
+    }
+
+    flipAll.play();
+  
+    setTimeout(() => {  
+      this.setState({
+        isGoing: false,
+        images: this.shuffle(images),
+        rightAnswers: 0,
+        steps: 0,
+        time: 0,
+      })
+    }, 500);
+  }
+
+  timer = () => {
+    const time = new Date();
+    
+    this.setState({
+      time: time,
+    })
+  }
+
   shuffle = (array) => {
     for (let i = array.length - 1; i > 0; i--) {
       let j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
+  }
+
+  countSteps = () => {
+    const steps = this.state.steps + 1;
+
+    this.setState({
+      steps: steps,
+    })
   }
 
   rememberCards = (value) => {
@@ -127,7 +192,7 @@ class Game extends React.Component {
     } else {
       this.returnPaired();
       this.resetState();
-      
+
       correct.play();
     }  
   }
@@ -155,19 +220,53 @@ class Game extends React.Component {
 
   endGame = (cards) => {
     const images = this.state.images;
+    const time = new Date() - this.state.time;
 
-    while (cards.length) {
-      cards[0].classList.remove('flipped');
+    if (cards.length == images.length) {
+      document.getElementById('restart-game').style.visibility = 'hidden';
+
+      this.getResults(time);
+      this.resetState();
+  
+      while (cards.length) {
+        cards[0].classList.remove('flipped');
+      }
 
       flipAll.play();
-    }
     
-    setTimeout(() => {
+      setTimeout(() => {  
+        this.setState({
+          rightAnswers: 0,
+          isGoing: false,
+          images: this.shuffle(images),
+        })
+      }, 500);
+    }
+  }
+
+  getResults = (time) => {
+    if (this.state.isGoing == true) {
       this.setState({
-        rightAnswers: 0,
-        images: this.shuffle(images),
+        time: time,
       })
-    }, 1000);
+
+      const formatedTime = this.formatTime(this.state.time);
+
+      console.log(`Steps - ${this.state.steps}, time - ${formatedTime}`);
+
+      this.setState({
+        isGoing: false,
+        steps: 0,
+        time: 0,
+      })
+    }
+  }
+
+  formatTime = (milliseconds) => {    
+    const minutes = Math.floor(milliseconds / 60000);
+    const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
+    
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
   }
 
   componentDidMount() {
@@ -191,10 +290,10 @@ class Game extends React.Component {
     if (second != null) {
       this.compareImages(first, second);
     }
-
+    
     if (answers == cards.length) {
       setTimeout(() => {
-        this.endGame(flipped);        
+        this.endGame(flipped);
       }, 1000);
     }
   }
@@ -205,7 +304,7 @@ class Game extends React.Component {
 
     return (  
       <div>
-        <Header chooseGameLevel={this.chooseGameLevel} />
+        <Header chooseGameLevel={this.chooseGameLevel} restartGame={this.restartGame} />
         <main>
           <AudioSettings setAudioVolume={this.setAudioVolume} />
           <div className={`cards cards__${this.state.level}`}>
@@ -213,7 +312,7 @@ class Game extends React.Component {
               images.map((image, index) => {
                 return(
                   <div className="card" key={index}>
-                    <Card image={image} cover={cover} id={index} rememberCards={this.rememberCards} />
+                    <Card image={image} cover={cover} id={index} gameStart={this.gameStart} endGame={this.endGame} countSteps={this.countSteps} rememberCards={this.rememberCards} />
                   </div>
                 )
               })

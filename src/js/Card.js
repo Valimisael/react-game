@@ -11,6 +11,8 @@ class Card extends React.Component {
     document.getElementById(this.props.id).classList.add('flipped');
     flipFront.play();
 
+    this.props.gameStart();
+    this.props.countSteps();
     this.props.rememberCards(this);
   }
 

@@ -33,7 +33,9 @@ class AudioSettings extends React.Component {
         {
           audio.map((audio, index) => {
             return (
-              <AudioSettingsItem audio={audio} handleClick={this.handleClick} handleMute={this.handleMute} handleVolume={this.handleVolume} key={index} />
+              <div key={index}>
+                <AudioSettingsItem audio={audio} handleClick={this.handleClick} handleMute={this.handleMute} handleVolume={this.handleVolume} />
+              </div>
             )
           })
         }

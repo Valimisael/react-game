@@ -2,6 +2,7 @@ import React from 'react';
 import ModeSwitcher from './ModeSwitcher';
 import ChooseCover from './ChooseCover';
 import Levels from './Levels';
+import RestartGame from './RestartGame';
 
 class Header extends React.Component {
   render() {
@@ -11,6 +12,7 @@ class Header extends React.Component {
           <div className="level">
             <Levels chooseGameLevel={this.props.chooseGameLevel} />
           </div>
+          <RestartGame restartGame={this.props.restartGame} />
         </div>
         <div className="game__name">
           <h1>Memory Game</h1>
