@@ -15,6 +15,10 @@ header {
   }
 
   &__name {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    
     h1 {
       font-size: $font-size-24;
     }

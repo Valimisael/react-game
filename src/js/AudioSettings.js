@@ -1,5 +1,5 @@
 import React from 'react';
-import AudioSettingsItem from './AudioSettingsItem';
+import AudioSetting from './AudioSetting';
 
 class AudioSettings extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class AudioSettings extends React.Component {
           audio.map((audio, index) => {
             return (
               <div key={index}>
-                <AudioSettingsItem audio={audio} handleClick={this.handleClick} handleMute={this.handleMute} handleVolume={this.handleVolume} />
+                <AudioSetting audio={audio} handleClick={this.handleClick} handleMute={this.handleMute} handleVolume={this.handleVolume} />
               </div>
             )
           })

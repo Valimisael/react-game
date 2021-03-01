@@ -9,7 +9,6 @@ class Levels extends React.Component {
     this.toggleActive = this.toggleActive.bind(this);
 
     this.state = {
-      levels: ['Easy', 'Medium', 'Hard'],
       active: 0,
     }
   }
@@ -27,7 +26,7 @@ class Levels extends React.Component {
       active: id,
     })
 
-    this.props.chooseGameLevel(id, title);
+    this.props.chooseGameLevel(title);
   }
 
   toggleActive = () => {
@@ -42,7 +41,7 @@ class Levels extends React.Component {
   }
 
   render() {
-    const levels = this.state.levels;
+    const {levels} = this.props;
 
     return (
       levels.map((level, index) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {flipFront, flipBack, flipAll, correct, music} from './Audio';
 
-class AudioSettingsItem extends React.Component {
+class AudioSetting extends React.Component {
   constructor(props) {
     super(props);    
 
@@ -74,4 +74,4 @@ class AudioSettingsItem extends React.Component {
   }
 }
 
-export default AudioSettingsItem;
+export default AudioSetting;

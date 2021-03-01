@@ -1,26 +1,22 @@
 import React from 'react';
 import Covers from './Covers';
+import Results from './Results';
 
 class PopUp extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick = () => {
-    document.getElementById('popup').style.display = 'none';
-  }
-
   render() {
-    return (
-      <div className="popup" id="popup">
-        <div className="popup__body">
-          <Covers changeCardsCover={this.props.changeCardsCover} />
-          <div className="popup__close" onClick={this.handleClick}>+</div>
-        </div>
-      </div>
-    )
+    const {content} = this.props;
+
+    switch (content) {
+      case 'choose-cover':
+        return <Covers changeCardsCover={this.props.changeCardsCover} />
+        break;
+      case 'get-results':
+        return <Results levels={this.props.levels} />
+        break;
+      default:
+        return <div>Not Found</div>;
+        break;
+    }
   }
 }
 
