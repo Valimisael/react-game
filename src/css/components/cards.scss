@@ -9,8 +9,8 @@
     max-width: 980px;
 
     .card {
-      width: 50%;      
-      height: 20vh;    
+      width: 34%;      
+      height: 22vh;
       
       @media (min-width: 768px) {
         width: 25%;      
@@ -27,8 +27,8 @@
       height: 17vh;   
       
       @media (min-width: 768px) {
-        width: 25%;      
-        height: 21vh;  
+        width: 22%;      
+        height: 19vh;  
       }   
     }
   }
@@ -38,11 +38,11 @@
 
     .card {
       width: 25%;      
-      height: 14vh;  
+      height: 17vh;  
       
       @media (min-width: 768px) {
-        width: 16.66%;      
-        height: 21vh;
+        width: 14.66%;      
+        height: 19vh;
       }
     }
   }

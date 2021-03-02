@@ -10,7 +10,8 @@ class HeaderButton extends React.Component {
   handleClick = () => {
     const content = this.props.id;
 
-    document.getElementById('popup').style.display = 'flex';
+    document.getElementById('popup').classList.add('open');
+    document.querySelector('body').classList.add('not-scrollable');
 
     this.props.updatePopUp(content);
   }

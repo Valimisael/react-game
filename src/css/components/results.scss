@@ -28,7 +28,7 @@
   }
 
   ol {
-    font-size: $font-size-18;
+    font-size: $font-size;
     padding: 0 10px;
   }
 
@@ -41,6 +41,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
+    padding-bottom: 25px;
 
     &__content {
       width: 33.33%;

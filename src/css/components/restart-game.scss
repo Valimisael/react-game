@@ -9,6 +9,10 @@
   margin: 0 10px;
   cursor: pointer;
 
+  &.show {
+    display: flex;
+  }
+
   &:hover .restart-game__icon {
     transform: rotate(-180deg);
   }

@@ -1,5 +1,5 @@
 import React from 'react';
-import ResultData from './ResultData';
+import ResultMessage from './ResultMessage';
 
 class Result extends React.Component { 
   constructor(props) {
@@ -26,8 +26,7 @@ class Result extends React.Component {
     const {title} = this.props;
     const level = title.toLowerCase();
 
-    let results = JSON.parse(localStorage.results)[level].sort((a, b) => (a.time - b.time));
-    results = results.sort((a, b) => (a.steps - b.steps));
+    const results = JSON.parse(localStorage.results)[level];
     this.results = this.formatTime(results);
 
     return (
@@ -38,7 +37,7 @@ class Result extends React.Component {
             results.map((result, index) => {
               return(
                 <li key={index}>
-                  <ResultData results={result} place={index + 1} />
+                  <ResultMessage results={result} place={index + 1} />
                 </li>
               )
             })

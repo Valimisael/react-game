@@ -3,7 +3,7 @@ import Header from './Header';
 import AudioSettings from './AudioSettings';
 import Card from './Card';
 import PopUp from './PopUp';
-import {flipBack, flipAll, correct, music} from './Audio';
+import {flipBack, flipAll, correct, music, win} from './Audio';
 
 import Cover from '../img/covers/cover-1.jpg';
 
@@ -38,6 +38,7 @@ class Game extends React.Component {
     this.returnPaired = this.returnPaired.bind(this);
     this.endGame = this.endGame.bind(this);
     this.getResults = this.getResults.bind(this);
+    this.sortResults = this.sortResults.bind(this);
 
     this.levels = ['Easy', 'Medium', 'Hard'];
     this.easy = [SCSS, Webpack, JS, ReactJS, SCSS, Webpack, JS, ReactJS];
@@ -48,6 +49,7 @@ class Game extends React.Component {
       medium: [],
       hard: [],
     };
+    this.resultsLimit = 10;
 
     this.state = {
       images: this.easy,
@@ -70,7 +72,7 @@ class Game extends React.Component {
   }
 
   chooseGameLevel = (title) => {
-    document.getElementById('restart-game').style.display = 'none';
+    document.getElementById('restart-game').classList.remove('show');
 
     const cards = document.getElementsByClassName('flipped');
     const images = this[title];
@@ -102,7 +104,7 @@ class Game extends React.Component {
   }
 
   gameStart = () => {
-    document.getElementById('restart-game').style.display = 'flex';
+    document.getElementById('restart-game').classList.add('show');
 
     if (this.state.isGoing == false) {
       this.setState({
@@ -114,7 +116,7 @@ class Game extends React.Component {
   }
 
   restartGame = (cards) => {    
-    document.getElementById('restart-game').style.display = 'none';
+    document.getElementById('restart-game').classList.remove('show');
 
     const images = this.state.images;
 
@@ -144,7 +146,8 @@ class Game extends React.Component {
   }
 
   closePopUp = () => {  
-    document.getElementById('popup').style.display = 'none';
+    document.getElementById('popup').classList.remove('open');
+    document.querySelector('body').classList.remove('not-scrollable');
   }
 
   timer = () => {
@@ -241,7 +244,7 @@ class Game extends React.Component {
     const time = new Date() - this.state.time;
 
     if (cards.length == images.length) {
-      document.getElementById('restart-game').style.display = 'none';
+      document.getElementById('restart-game').classList.remove('show');
 
       this.getResults(time);
       this.resetState();
@@ -259,6 +262,8 @@ class Game extends React.Component {
           images: this.shuffle(images),
         })
       }, 500);
+
+      win.play();
     }
   }
 
@@ -277,6 +282,14 @@ class Game extends React.Component {
         }
       )
       
+      if (this.results[level].length > 0) {
+        this.results[level] = this.sortResults(this.results[level]);
+
+        if (this.results[level].length > this.resultsLimit) {
+          this.results[level].pop();
+        }
+      }
+
       localStorage.results = JSON.stringify(this.results);
 
       this.setState({
@@ -285,6 +298,12 @@ class Game extends React.Component {
         time: 0,
       })
     }
+  }
+
+  sortResults = (results) => {
+    const sortedResults = results.sort((a, b) => (a.time - b.time)).sort((a, b) => (a.steps - b.steps));
+
+    return sortedResults;
   }
 
   componentDidMount() {
