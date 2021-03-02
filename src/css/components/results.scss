@@ -30,6 +30,10 @@
   ol {
     font-size: $font-size;
     padding: 0 10px;
+      
+    @media (min-width: 1200px) {
+      font-size: $font-size-18;
+    } 
   }
 
   li {

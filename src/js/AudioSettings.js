@@ -32,6 +32,15 @@ class AudioSettings extends React.Component {
       <div className="audio-settings">
         {
           audio.map((audio, index) => {
+            const storage = {
+              volume: audio.volume,
+              muted: audio.muted,
+            }
+    
+            if (localStorage.getItem(`${audio.class}`) == null) {
+              localStorage[audio.class] = JSON.stringify(storage);
+            }
+
             return (
               <div key={index}>
                 <AudioSetting audio={audio} handleClick={this.handleClick} handleMute={this.handleMute} handleVolume={this.handleVolume} />

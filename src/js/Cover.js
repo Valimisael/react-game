@@ -9,7 +9,8 @@ class Cover extends React.Component {
 
   handleClick = (event) => {    
     this.props.changeCardsCover(event.target.src);
-    
+    localStorage.setItem('cover', event.target.src);
+
     document.getElementById('popup').classList.remove('open');
     document.querySelector('body').classList.remove('not-scrollable');
   }

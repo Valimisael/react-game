@@ -9,7 +9,16 @@ class Card extends React.Component {
 
   handleClick = () => {
     document.getElementById(this.props.id).classList.add('flipped');
-    flipFront.play();
+    
+    if (localStorage.getItem('sounds') != null) {
+      const storage = JSON.parse(localStorage.sounds);
+      if (storage.muted == '') {
+        flipFront.play();
+        flipFront.volume = storage.volume/100;
+      }
+    } else {
+      flipFront.play();
+    }
 
     this.props.gameStart();
     this.props.countSteps();

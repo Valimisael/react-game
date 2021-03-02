@@ -44,6 +44,7 @@ class Game extends React.Component {
     this.easy = [SCSS, Webpack, JS, ReactJS, SCSS, Webpack, JS, ReactJS];
     this.medium = [Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack, Angular, CSS, JS, Gulp, ReactJS, SCSS, Vue, Webpack];
     this.hard = [Angular, CSS, ESLint, Gulp, HTML, JS, NodeJS, Redux, ReactJS, SCSS, Vue, Webpack, Angular, CSS, ESLint, Gulp, HTML, JS, NodeJS, Redux, ReactJS, SCSS, Vue, Webpack];
+    this.cover = Cover;
     this.results = {
       easy: [],
       medium: [],
@@ -54,7 +55,6 @@ class Game extends React.Component {
     this.state = {
       images: this.easy,
       level: 'easy',
-      cover: Cover,
       first: {
         src: null,
         id: null,
@@ -74,13 +74,23 @@ class Game extends React.Component {
   chooseGameLevel = (title) => {
     document.getElementById('restart-game').classList.remove('show');
 
+    localStorage.setItem('level', title);
+
     const cards = document.getElementsByClassName('flipped');
     const images = this[title];
 
     while (cards.length) {
       cards[0].classList.remove('flipped');
-
-      flipAll.play();
+    
+      if (localStorage.getItem('sounds') != null) {
+        const storage = JSON.parse(localStorage.sounds);
+        if (storage.muted == '') {
+          flipAll.play();
+          flipAll.volume = storage.volume/100;
+        }
+      } else {
+        flipAll.play();
+      }
     }
 
     this.resetState();
@@ -125,8 +135,16 @@ class Game extends React.Component {
     while (cards.length) {
       cards[0].classList.remove('flipped');
     }
-
-    flipAll.play();
+    
+    if (localStorage.getItem('sounds') != null) {
+      const storage = JSON.parse(localStorage.sounds);
+      if (storage.muted == '') {
+        flipAll.play();
+        flipAll.volume = storage.volume/100;
+      }
+    } else {
+      flipAll.play();
+    }
   
     setTimeout(() => {  
       this.setState({
@@ -207,14 +225,30 @@ class Game extends React.Component {
       setTimeout(() => {
         document.getElementById(first).classList.remove('flipped');
         document.getElementById(second).classList.remove('flipped');
-
-        flipBack.play();
+    
+        if (localStorage.getItem('sounds') != null) {
+          const storage = JSON.parse(localStorage.sounds);
+          if (storage.muted == '') {
+            flipBack.play();
+            flipBack.volume = storage.volume/100;
+          }
+        } else {
+          flipBack.play();
+        }
       }, 1000);
     } else {
       this.returnPaired();
       this.resetState();
-
-      correct.play();
+    
+      if (localStorage.getItem('sounds') != null) {
+        const storage = JSON.parse(localStorage.sounds);
+        if (storage.muted == '') {
+          correct.play();
+          correct.volume = storage.volume/100;
+        }
+      } else {
+        correct.play();
+      }
     }  
   }
 
@@ -252,8 +286,16 @@ class Game extends React.Component {
       while (cards.length) {
         cards[0].classList.remove('flipped');
       }
-
-      flipAll.play();
+    
+      if (localStorage.getItem('sounds') != null) {
+        const storage = JSON.parse(localStorage.sounds);
+        if (storage.muted == '') {
+          flipAll.play();
+          flipAll.volume = storage.volume/100;
+        }
+      } else {
+        flipAll.play();
+      }
     
       setTimeout(() => {  
         this.setState({
@@ -262,8 +304,16 @@ class Game extends React.Component {
           images: this.shuffle(images),
         })
       }, 500);
-
-      win.play();
+    
+      if (localStorage.getItem('sounds') != null) {
+        const storage = JSON.parse(localStorage.sounds);
+        if (storage.muted == '') {
+          win.play();
+          win.volume = storage.volume/100;
+        }
+      } else {
+        win.play();
+      }
     }
   }
 
@@ -337,10 +387,14 @@ class Game extends React.Component {
 
   render () {
     const images = this.state.images;
-    const cover = this.state.cover;
+    let cover = this.cover;
 
     if (localStorage.getItem('results') != null) {
       this.results = JSON.parse(localStorage.results);
+    } 
+    
+    if (localStorage.getItem('cover') != null) {
+      cover = localStorage.getItem('cover');
     }
 
     return (  

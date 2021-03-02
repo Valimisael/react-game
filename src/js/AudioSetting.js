@@ -11,6 +11,7 @@ class AudioSetting extends React.Component {
 
     this.music = music;
     this.sounds = [flipFront, flipBack, correct, flipAll, win];
+    this.storage = {};
   }
 
   handleClick = (event) => {
@@ -25,25 +26,38 @@ class AudioSetting extends React.Component {
 
   handleMute = (event) => {
     const muteButton = event.target;
-    const audio = event.target.classList;
+    const audio = event.target.id;
 
-    if (audio == 'music') {
-      if (muteButton.checked) {
-        this.music.muted = true;
-        this.music.pause();
+    if (audio == 'sounds') {
+      if (muteButton.classList.contains('muted')) {
+        muteButton.classList.remove('muted');
+        this.sounds.map((sound) => {
+          sound.muted = false;
+          this.storage.muted = '';
+        })
       } else {
+        muteButton.classList.add('muted');
+        this.sounds.map((sound) => {
+          sound.muted = true;
+          this.storage.muted = 'muted';
+        })
+      }
+    } else if (audio == 'music') {
+      if (muteButton.classList.contains('muted')) {
         this.music.muted = false;
         this.music.play();
+        this.music.volume = this.storage.volume/100;
+        this.storage.muted = '';
+        muteButton.classList.remove('muted');
+      } else {
+        this.music.muted = true;
+        this.music.pause();
+        this.storage.muted = 'muted';
+        muteButton.classList.add('muted');
       }
-    } else if (audio == 'sounds') {
-      this.sounds.map((sound) => {
-        if (muteButton.checked) {
-          sound.muted = true;
-        } else {
-          sound.muted = false;
-        }
-      })
     }
+
+    localStorage[audio] = JSON.stringify(this.storage);
   }
 
   handleVolume = (event) => {
@@ -57,17 +71,33 @@ class AudioSetting extends React.Component {
         sound.volume = volume/100;
       })
     }
+
+    this.storage.volume = volume;
+
+    localStorage[audio] = JSON.stringify(this.storage);
+  }
+
+  componentDidMount() {    
+    if (localStorage.getItem('music') != null) {
+      this.storage = JSON.parse(localStorage['music']);
+      this.storage.muted = 'muted';
+      localStorage.music = JSON.stringify(this.storage);
+    }
   }
 
   render() {
     const {audio} = this.props;
+    
+    if (localStorage.getItem(`${audio.class}`) != null) {
+      this.storage = JSON.parse(localStorage[audio.class]);
+    }
 
     return(
       <div className="audio-settings__item">
         <div className="audio-settings__item--name">{`${audio.title}: `} </div>
-        <input className={audio.class} type="range" min="0" max="100" name="volume" step="1" defaultValue={audio.volume} onChange={this.handleVolume} />
-        <label className={`audio-settings__mute ${audio.muted}`} htmlFor={audio.id} onClick={this.handleClick}></label>
-        <input className={audio.class} type="checkbox" name="mute-music" id={audio.id} defaultChecked={audio.checked} onChange={this.handleMute} />
+        <input className={audio.class} type="range" min="0" max="100" name="volume" step="1" defaultValue={`${(localStorage.getItem(`${audio.class}`) != null) ? this.storage.volume : audio.volume}`} onChange={this.handleVolume} />
+        <label id={audio.class} className={`audio-settings__mute ${(localStorage.getItem(`${audio.class}`) != null) ? this.storage.muted : audio.muted}`} htmlFor={audio.id} onClick={this.handleMute}></label>
+        <input type="checkbox" name="mute-music" id={audio.id} />
       </div>
 
     )

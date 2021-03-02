@@ -4,9 +4,15 @@ import '../css/main.scss';
 import Game from './Game';
 import Footer from './Footer';
 
-const App = () => {  
+const App = () => {
+  let mode = '';
+
+  if (localStorage.getItem('mode') != null) {
+    mode = localStorage.getItem('mode');
+  }
+
   return(
-    <div className="app" id="app">
+    <div className={`app ${mode}`} id="app">
       <Game />
       <Footer />
     </div>
