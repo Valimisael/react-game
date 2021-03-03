@@ -17,11 +17,11 @@ class HeaderButton extends React.Component {
   }
   
   render() {
-    const {image} = this.props;
+    const {image, title} = this.props;
 
     return (
       <div className="header-button">
-        <img className="header-button__icon" src={image} onClick={this.handleClick} />
+        <img className="header-button__icon" src={image} onClick={this.handleClick} title={title} />
       </div>
     )
   }

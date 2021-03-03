@@ -4,6 +4,7 @@ import AudioSettings from './AudioSettings';
 import Card from './Card';
 import PopUp from './PopUp';
 import {flipBack, flipAll, correct, music, win} from './Audio';
+import {initHotKeys} from './HotKeys';
 
 import Cover from '../img/covers/cover-1.jpg';
 
@@ -357,6 +358,34 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
+    const restartGame = this.restartGame;
+    const updatePopUp = this.updatePopUp;
+    const popUp = document.getElementById('popup');
+
+    window.onkeydown = function(event) {
+      initHotKeys(event);
+      console.log(event.keyCode)
+
+      const flipped = document.getElementsByClassName('flipped');
+
+      if (event.shiftKey && event.keyCode === 82) {
+        restartGame(flipped);
+      }
+
+      if (event.shiftKey && event.keyCode === 65) {
+        updatePopUp('get-results');
+        popUp.classList.add('open');
+        document.querySelector('body').classList.add('not-scrollable');
+      }
+
+      if (event.shiftKey && event.keyCode === 67) {
+        updatePopUp('choose-cover');
+        popUp.classList.add('open');
+        document.querySelector('body').classList.add('not-scrollable');
+      }
+    }
+
+
     music.muted = true;
     music.volume = 0.2;
 

@@ -16,7 +16,6 @@
 
   &__body {
     width: 80%;
-    height: 80vw;
     max-width: 900px;
     max-height: 720px;
     background-color: $bg-milk;
@@ -33,7 +32,6 @@
       
     @media (min-width: 1200px) {
       width: 60%;
-      height: 48vw;
     } 
   }
 

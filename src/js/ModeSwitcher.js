@@ -33,7 +33,7 @@ class ModeSwitcher extends React.Component {
     }
 
     return (
-      <label className="switch">
+      <label className="switch" title="Switch Mode">
         <input id="switch" type="checkbox" onChange={this.handleInputChange} defaultChecked={checked} />
         <span className="slider round"></span>
       </label>

@@ -1,6 +1,7 @@
 import React from 'react';
 import Covers from './Covers';
 import Results from './Results';
+import HotKeysList from './HotKeysList';
 
 class PopUp extends React.Component {
   render() {
@@ -12,6 +13,9 @@ class PopUp extends React.Component {
         break;
       case 'get-results':
         return <Results levels={this.props.levels} />
+        break;
+      case 'hot-keys':
+        return <HotKeysList />
         break;
       default:
         return <div>Not Found</div>;

@@ -18,7 +18,7 @@ class Level extends React.Component {
     return (
       <div>
         <input className="level__input" id={value} type="radio" name="radio" value={level} input={inputId} onChange={this.handleChange} />
-        <label className="level__label" htmlFor={value} >{level}</label>
+        <label className="level__label" htmlFor={value} title={`${level} level`} >{level}</label>
       </div>
     )
   }

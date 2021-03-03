@@ -96,7 +96,7 @@ class AudioSetting extends React.Component {
       <div className="audio-settings__item">
         <div className="audio-settings__item--name">{`${audio.title}: `} </div>
         <input className={audio.class} type="range" min="0" max="100" name="volume" step="1" defaultValue={`${(localStorage.getItem(`${audio.class}`) != null) ? this.storage.volume : audio.volume}`} onChange={this.handleVolume} />
-        <label id={audio.class} className={`audio-settings__mute ${(localStorage.getItem(`${audio.class}`) != null) ? this.storage.muted : audio.muted}`} htmlFor={audio.id} onClick={this.handleMute}></label>
+        <label id={audio.class} className={`audio-settings__mute ${(localStorage.getItem(`${audio.class}`) != null) ? this.storage.muted : audio.muted}`} htmlFor={audio.id} onClick={this.handleMute} title="Mute"></label>
         <input type="checkbox" name="mute-music" id={audio.id} />
       </div>
 

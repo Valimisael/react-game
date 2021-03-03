@@ -16,13 +16,17 @@ class Covers extends React.Component {
   }
   render() {
     return (
-      this.covers.map((cover, index) => {
-        return (
-          <div className="cover" key={index} >
-            <Cover changeCardsCover={this.props.changeCardsCover} cover={cover} id={index} />
-          </div>
-        )  
-      })
+      <div className="covers">
+      {
+        this.covers.map((cover, index) => {
+          return (
+            <div className="cover" key={index} >
+              <Cover changeCardsCover={this.props.changeCardsCover} cover={cover} id={index} />
+            </div>
+          )  
+        })
+      }
+      </div>
     )
   }
 }
