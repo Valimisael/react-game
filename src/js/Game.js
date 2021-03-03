@@ -7,7 +7,7 @@ import {flipBack, flipAll, correct, music, win} from './Audio';
 import {initHotKeys} from './HotKeys';
 
 import Cover from '../img/covers/cover-1.jpg';
-
+import FullScreen from '../img/full-screen.png';
 import Angular from '../img/cards/angular.jpg';
 import CSS from '../img/cards/css.jpg';
 import ESLint from '../img/cards/eslint.jpg';
@@ -40,6 +40,7 @@ class Game extends React.Component {
     this.endGame = this.endGame.bind(this);
     this.getResults = this.getResults.bind(this);
     this.sortResults = this.sortResults.bind(this);
+    this.handleFullScreen = this.handleFullScreen.bind(this);
 
     this.levels = ['Easy', 'Medium', 'Hard'];
     this.easy = [SCSS, Webpack, JS, ReactJS, SCSS, Webpack, JS, ReactJS];
@@ -69,6 +70,7 @@ class Game extends React.Component {
       rightAnswers: 0,
       time: 0,
       steps: 0,
+      isFullScreen: false,
     }
   }
 
@@ -364,7 +366,6 @@ class Game extends React.Component {
 
     window.onkeydown = function(event) {
       initHotKeys(event);
-      console.log(event.keyCode)
 
       const flipped = document.getElementsByClassName('flipped');
 
@@ -384,7 +385,6 @@ class Game extends React.Component {
         document.querySelector('body').classList.add('not-scrollable');
       }
     }
-
 
     music.muted = true;
     music.volume = 0.2;
@@ -411,6 +411,22 @@ class Game extends React.Component {
       setTimeout(() => {
         this.endGame(flipped);
       }, 1000);
+    }
+  }
+
+  handleFullScreen = () => {
+    const game = document.querySelector('main');
+
+    if (this.state.isFullScreen == false) {
+      game.requestFullscreen();
+      this.setState({
+        isFullScreen: true,
+      })
+    } else {
+      document.exitFullscreen();
+      this.setState({
+        isFullScreen: false,
+      })
     }
   }
 
@@ -441,6 +457,9 @@ class Game extends React.Component {
                 )
               })
             }        
+          </div>
+          <div className="full-screen button">
+            <img className="button__icon" src={FullScreen} onClick={this.handleFullScreen} />
           </div>
         </main> 
         <div className="popup" id="popup">

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class HeaderButton extends React.Component {
+class Button extends React.Component {
   constructor(props) {
     super(props);
 
@@ -20,11 +20,11 @@ class HeaderButton extends React.Component {
     const {image, title} = this.props;
 
     return (
-      <div className="header-button">
-        <img className="header-button__icon" src={image} onClick={this.handleClick} title={title} />
+      <div className="button">
+        <img className="button__icon" src={image} onClick={this.handleClick} title={title} />
       </div>
     )
   }
 }
 
-export default HeaderButton;
+export default Button;
