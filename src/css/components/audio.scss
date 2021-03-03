@@ -1,0 +1,33 @@
+.audio-settings {
+  padding: 10px;
+  display: flex;
+
+  &__item {
+    display: flex;
+    padding: 0 10px;
+
+    &--name {
+      padding-right: 10px;
+      font-weight: 700;
+    }
+  }
+
+  &__mute {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    background-image: url("../../img/audio/volume-up.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+    &.muted {
+      background-image: url("../../img/audio/volume-mute.png");
+    }
+  }
+
+  input[type="checkbox"] {
+    display: none;
+  }
+}

@@ -1,0 +1,18 @@
+.button {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $bg-milk;
+  border-radius: 50%;
+  margin: 0 10px;
+  cursor: pointer;
+
+  &__icon {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+    object-position: center;
+  }
+}

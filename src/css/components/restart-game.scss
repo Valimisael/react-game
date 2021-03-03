@@ -1,0 +1,15 @@
+.restart-game {
+  display: none;
+  
+  &.show {
+    display: flex;
+  }
+
+  &:hover .restart-game__icon {
+    transform: rotate(-180deg);
+  }
+
+  &__icon {
+    transition: all 0.3s ease-in-out;
+  }
+}

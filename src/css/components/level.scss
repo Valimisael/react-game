@@ -1,0 +1,40 @@
+.level {
+  display: flex;
+  background-color: $bg-milk;
+  height: 34px;
+  border-radius: 34px;
+  padding: 4px;
+  margin: 0 10px;
+
+  &__step {
+    padding: 0 10px;
+    line-height: 26px;
+    color: $color-white;
+
+    &:nth-child(1) {
+      @include changeBackground($bg-green);
+
+      border-top-left-radius: 26px;
+      border-bottom-left-radius: 26px;
+    }
+
+    &:nth-child(2) {
+      @include changeBackground($bg-orange);
+    }
+
+    &:nth-child(3) {
+      @include changeBackground($bg-red);
+
+      border-top-right-radius: 26px;
+      border-bottom-right-radius: 26px;
+    }
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__label {
+    cursor: pointer;
+  }
+}

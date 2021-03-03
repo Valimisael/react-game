@@ -1,0 +1,95 @@
+html {
+  box-sizing: border-box;
+  height: 100%;
+  font-size: $font-size;
+  -ms-overflow-style: auto;
+  scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: darken($bg-milk, 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: $bg-blue;
+}
+
+::-moz-selection {
+  color: $bg-blue;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+::selection {
+  color: $color-white;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  outline: none;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 320px;
+  min-height: 100%;
+  color: $color-black;
+  font-family: $font-family;
+  font-size: 14px;
+  line-height: 1;
+  background: $bg-milk;
+  -webkit-font-smoothing: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &.not-scrollable {
+    overflow-y: hidden;
+  }
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  color: $color-black;
+  width: 100%;
+  min-height: calc(100vh - 150px);
+  background-color: $bg-milk;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-evenly;
+      
+  @media (min-width: 768px) {
+    min-height: calc(100vh - 100px);
+  } 
+}
+
+a {
+  color: $color-white;
+  text-decoration: none;
+}
+
+strong {
+  font-weight: bold;
+}
+
+.night-mode {
+  header,
+  footer {
+    background-color: $night-nav;
+  }
+
+  main {
+    background-color: $night-body;
+  }
+
+  .audio-settings__item--name {
+    color: $color-white;
+  }
+}

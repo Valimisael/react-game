@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
+
+@import 
+  'base/variables',
+  'base/common',
+  'base/mixins';
+
+@import
+  'components/header',
+  'components/footer',
+  'components/cards',
+  'components/mode-switcher',
+  'components/button',
+  'components/popup',
+  'components/covers',
+  'components/level',
+  'components/audio',
+  'components/restart-game',
+  'components/results',
+  'components/hot-keys',
+  'components/full-screen';
