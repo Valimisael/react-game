@@ -16,8 +16,8 @@ class RestartGame extends React.Component {
 
   render () {
     return (
-      <div className="restart-game" id="restart-game">
-        <img className="restart-game__icon" src={Restart} onClick={this.handleClick} title="Restart game" />
+      <div className="button restart-game" id="restart-game">
+        <img className="button__icon restart-game__icon" src={Restart} onClick={this.handleClick} title="Restart game" />
       </div>
     )
   }

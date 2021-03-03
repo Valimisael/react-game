@@ -1,14 +1,6 @@
 .restart-game {
-  width: 34px;
-  height: 34px;
   display: none;
-  justify-content: center;
-  align-items: center;
-  background-color: $bg-milk;
-  border-radius: 50%;
-  margin: 0 10px;
-  cursor: pointer;
-
+  
   &.show {
     display: flex;
   }
@@ -18,10 +10,6 @@
   }
 
   &__icon {
-    width: 26px;
-    height: 26px;
-    object-fit: contain;
-    object-position: center;
     transition: all 0.3s ease-in-out;
   }
 }

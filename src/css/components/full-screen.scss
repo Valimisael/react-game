@@ -1,7 +1,8 @@
 .full-screen {
   position: fixed;
-  bottom: 10px;
+  bottom: 70px;
   right: 10px;
+  background-color: $bg-blue;
 
   .button__icon {
     transition: all 0.3s ease-in-out;
@@ -18,6 +19,6 @@
 
 :fullscreen {
   .full-screen {
-    background-color: $bg-blue;
+    bottom: 20px;
   }
 }
